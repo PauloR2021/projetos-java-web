@@ -1,10 +1,131 @@
+<!--
+ * Linguagem: HTML 5
+ * IDE: IntelliJ IDEA
+ * Criando o HTML para ser possivel editar as cidades
+ * @author Paulo Ricardo Soares
+-->
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1,
+                   shrink-to-fit=no">
+    <title>Editar Cidade</title>
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="container">
+
+        <!-- CABEÇALHO -->
+        <div class="jumbotron mt-5">
+            <h1>EDITAR CIDADE</h1>
+            <p>Faça as suas alterações na Cidade</p>
+        </div>
+
+        <!-- MENSAGEM DE SUCESSO QUANDO CADASTRADO NOVA CIDADE -->
+
+        <div
+                th:if="${mensagem}"
+                class="alert alert-success"
+                role="alert">
+
+            <span th:text="${mensagem}"></span>
+
+        </div>
+
+        <!-- MENSAGEM DE ERRO QUANDO CADASTRADO NOVA CIDADE -->
+
+        <div
+                th:if="${error}"
+                class="alert alert-danger"
+                role="alert">
+            <span th:text="${error}"></span>
+
+        </div>
+
+        <!-- FORMULÁRIO -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Dados Cidade</h4>
+            </div>
+
+            <div class="card-body">
+                <form
+                        th:action="@{/cidades/editar/{id}(id=${cidade.id})}"
+                        method="post">
+
+                    <!-- ID -->
+                    <div class="form-group">
+                        <label for="id">ID:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="id"
+                                th:value="${cidade.id}"
+                                disabled
+                        >
+                    </div>
+
+                    <!-- NOME -->
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="nome"
+                                name="nome"
+                                th:value="${cidade.nome}"
+                                required
+                        >
+                    </div>
+
+                    <!-- ESTADO -->
+                    <div class="form-group">
+                        <label for="estado">Estado>:</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="estado"
+                                name="estado"
+                                th:value="${cidade.estado}"
+                                required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-success">SALVAR ALTERAÇÕES</button>
+
+                    <!-- BOTÃO VOLTAR -->
+
+                    <a th:href="@{/}" class="btn btn-secondary ml-2"> VOLTAR </a>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- JAVASCRIPT BOOTSTRAP -->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js">
+    </script>
+
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js">
+    </script>
+
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+    </script>
+
 
 </body>
 </html>
