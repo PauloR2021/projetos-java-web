@@ -15,8 +15,7 @@ package com.pr.software.crud_cidades_thymeleaf.controller;
 import com.pr.software.crud_cidades_thymeleaf.dtos.RequestCidade;
 import com.pr.software.crud_cidades_thymeleaf.service.CidadeService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -42,7 +41,44 @@ public class CidadeController {
 
         //Redireciona a página para a Home quando a cidade é cadastrada
         return "redirect:/";
-
     }
+
+    //Endpoint para editar as cidades
+    @PostMapping("/cidades/editar/{id}")
+    public String editar(
+            @PathVariable Long id,
+            @RequestParam String nome,
+            @RequestParam String estado,
+            RedirectAttributes redirectAttributes)
+    {
+        RequestCidade requestCidade = new RequestCidade(nome, estado);
+        cidadeService.editarCidade(id,requestCidade);
+
+        redirectAttributes.addFlashAttribute(
+                "mensagem",
+                "Cidade alterada com sucesso!"
+        );
+
+        return "redirect:/";
+    }
+
+    //Endpoint para excluir cidade
+    @PostMapping("/cidades/excluir/{id}")
+    public String excluir(
+            @PathVariable Long id,
+            RedirectAttributes redirectAttributes
+    )
+    {
+        cidadeService.excluirCidade(id);
+
+        redirectAttributes.addFlashAttribute(
+                "mensagem",
+                "Cidade excluída com sucesso!"
+        );
+
+        return "redirect:/";
+    }
+    
+
 
 }
