@@ -1,3 +1,13 @@
+/**
+ * Linguagem: Java 25
+ * IDE: IntelliJ IDEA
+ * <p>Classe responsável por mapear a tabela do banco de dados</p>
+ * <p>Faz o mapeamento de como a tabela vai se comportar no banco de dados</p>
+ *
+ * @author Paulo Ricardo Soares
+ */
+
+
 package com.pr.software.crud_cidades_thymeleaf.model;
 
 import jakarta.persistence.*;
