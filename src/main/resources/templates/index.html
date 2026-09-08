@@ -1,3 +1,10 @@
+<!--
+ * Linguagem: HTML 5
+ * IDE: IntelliJ IDEA
+ * Criando o HTML para chamar a tela principal do HTML
+ * @author Paulo Ricardo Soares
+-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -121,11 +128,19 @@
                                         class="btn btn-warning mr-2">ALTERAR
                                 </a>
 
-                                <!-- BTN EXCLUIR -->
-                                <a
-                                    th:href="@{/cidades/excluir/{id}(id=${cidade.id})}"
-                                    class="btn btn-danger mr-2">EXCLUIR
-                                </a>
+                                <!-- BTN EXCLUIR - COMO O METODO DE DELETAR NO HMTL E POST O BUTTON NECESSITA ESTAR NO FORM-->
+                                <form
+                                        th:action="@{/cidades/excluir/{id}(id=${cidade.id})}"
+                                        method="post"
+                                        style="display: inline"
+                                >
+                                    <button
+                                            type="submit"
+                                            class="btn btn-danger mr-2"> EXCLUIR
+                                    </button>
+
+                                </form>
+
                             </div>
                         </td>
                     </tr>
