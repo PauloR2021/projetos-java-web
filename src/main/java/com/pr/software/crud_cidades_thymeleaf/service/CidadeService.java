@@ -44,6 +44,32 @@ public class CidadeService {
                 .toList();
     }
 
+    //Buscando as cidades por 'ID'
+    public ResponseCidade buscarPorId(Long id){
+        Cidade cidade = cidadeRepository.findById(id).orElseThrow(() -> new RuntimeException("Cidade não encontrada"));
+
+        return toResponseCidade(cidade);
+    }
+
+    //Editando as cidades
+    public ResponseCidade editarCidade(Long id, RequestCidade requestCidade){
+        Cidade cidade = cidadeRepository.findById(id).orElseThrow(() -> new RuntimeException("Cidade não encontrada"));
+
+        cidade.setNome(requestCidade.nome());
+        cidade.setEstado(requestCidade.estado());
+
+        Cidade  atualizarCidade = cidadeRepository.save(cidade);
+
+        return toResponseCidade(atualizarCidade);
+    }
+
+    //Excluindo as Cidades
+    public void excluirCidade(Long id){
+        Cidade cidade = cidadeRepository.findById(id).orElseThrow(() -> new RuntimeException("Cidade não encontrada"));
+
+        cidadeRepository.delete(cidade);
+    }
+
 
     private ResponseCidade toResponseCidade(Cidade cidade) {
         return new ResponseCidade(cidade.getId(), cidade.getNome(), cidade.getEstado());
